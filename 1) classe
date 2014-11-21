@@ -1,0 +1,50 @@
+#!/bin/bash
+
+TestEntier()									#
+{										# Une fonction qui tourne en boucle tant que la variable
+	Nombre=$1								# donnee n'est pas numerique
+	until [ $Nombre -ne 0 -o $Nombre -eq 0 2>/dev/null ]			#
+	do									#
+		echo -n "$Nombre nest pas un entier, merci de changer : "	#
+		read Nombre							#
+	done									#
+}
+
+
+case $# in
+
+	0)	echo "Il manque deux arguments"			# Si aucun arguments le programme demande un premier
+		echo -n "Entrer le premier argument : "		# 
+		read var1					# Lance le programme de test avec cette variable
+		TestEntier "$var1"				#
+		var1="$Nombre"					# Demande une deuxieme variable
+		echo -n "Entrer le deuxieme argument : "	#
+		read var2					#
+		TestEntier "$var2"				# Lance le programme de test d'entier 
+		var2="$Nombre";;				#
+
+	1)	var1="$1"						# Si il y a un seule argument
+		TestEntier "$var1"					# On le test
+		var1="$Nombre"						#
+		echo "Il manque un argument, entrer votre nombre : "	# On en demande un deuxieme
+		read var2						#
+		TestEntier "$var2"					# Et on le test
+		var2="$Nombre";;					#
+
+	2)	var1="$1"		# Si il y a 2 arguments 
+		TestEntier "$var1"	#
+		var1="$Nombre"		#On teste les deux 
+		var2="$2"		#
+		TestEntier "$var2"	#
+		var2="$Nombre";;	#
+
+	*)	echo "trop d'argument" 	# Si il y a trop d'argument on arrete le programme
+		exit;;			#
+esac
+
+if [ "$var1" -gt "$var2" ]			# Simple condition if afin de comparer les deux variables
+then						#
+	echo "$var2 est inferieur a $var1"	#
+else						#
+	echo "$var1 est inferieur a $var2"	#
+fi						#
