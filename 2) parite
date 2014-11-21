@@ -1,0 +1,39 @@
+#!/bin/bash
+
+TestEntier()									#
+{										# Une fonction qui tourne en boucle tant que la variable
+	Nombre=$1								# donnee n'est pas numerique
+	until [ $Nombre -ne 0 -o $Nombre -eq 0 2>/dev/null ]			#
+	do									#
+		echo -n "$Nombre nest pas un entier, merci de changer : "	#
+		read Nombre							#
+	done									#
+}
+
+
+case $# in
+
+	0)	echo "Merci de donner un nombre"	# Si il n'y a pas d'argument, on en demande un
+		echo -n "Entrer un nombre : "		#
+		read var				#
+		TestEntier "$var"			# Puis on la test
+		var="$Nombre";;				#
+
+	1)	var="$1"		#
+		TestEntier "$var"	# Si il y a un argument on le test 
+		var="$Nombre";;		#
+
+	*)	echo "trop d'argument"		# Si il y a trop d'arguments on arrete le programme
+		exit;;				#
+esac
+
+
+
+modulo=$(($var % 2)) # le modulo d'un nombre pair est egal a 0, d
+
+if [ $modulo -eq 0 ]				#
+then						# Simple boucle if afin d'afficher le resultat en fonction de la valeur de modulo
+	echo "$var est un nombre pair"		#
+else						#
+	echo "$var est un nombre impair"	#
+fi						#
