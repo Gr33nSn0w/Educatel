@@ -1,0 +1,24 @@
+#!/bin/bash
+
+Test()
+{
+	if [ $1 -ne 0 -o $1 -eq 0 2>/dev/null ] # un nombre est toujours egal a 0 ou pas egal a 0 
+	then
+		echo "$1 est numerique" # Si $1 est egal a 0 ou pas alors c'est un integer 
+	else
+		echo "$1 nest pas numerique" # Si il est pas egal alors il renvoit une erreur dans le null est affiche le contenu du else
+	fi
+}
+
+case $# in # Permet de tester le nombre d'arguments
+
+	0)	echo -n "Fournissez moi un argument s'il vous plait : " # Si il n'y a pas d'argument on en demande un
+		read var # On recupere cette valeur dans une variable
+		Test "$var";; # On lance le test pour savoir si c'est une variable numerique
+
+	1)	var="$1" # Ici on lance directement le test car nous avons un argument
+		Test "$var";;
+
+	*)	echo "trop d'argument" # Ici il y a trop d'argument alors on arrete le test
+		exit;;
+esac
