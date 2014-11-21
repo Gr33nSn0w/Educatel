@@ -1,0 +1,13 @@
+#!/bin/bash
+
+
+extension=($(ls | grep '\.' | sed 's/.*\.//' | sort -u)) # Range dans un tableau toutes les extensions de fichier du dossier courant
+
+for i in ${extension[*]} # Permet de parcourir le tableau d'extension
+do
+	mkdir dossier-extension-$i 2>/dev/null # "2>/dev/null" permet de pas afficher d'erreur lorsque un dossier du meme nom exite deja
+	chmod 777 dossier-extension-$i # De base les dossier peuvent etre bloque si le programme est execute par un SU
+	mv *.$i dossier-extension-$i # Permet de mettre les fichier dans les dossier correspondant 
+	echo "le dossier-extension-$i a ete cree. il contient : "
+	ls -1 dossier-extension-$i # Permet de lister les fichiers qui se trouve dans le dossier cree
+done
